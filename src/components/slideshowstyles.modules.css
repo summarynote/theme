@@ -9,18 +9,19 @@ img {vertical-align: middle;}
 }
 
 /* Next & previous buttons */
-.prev, .next {
+.prev, .next, .playpause, .slidecount {
   cursor: pointer;
-  position: absolute;
-  top: 50%;
   width: auto;
-  padding: 16px;
-  margin-top: -22px;
+  padding: 5px;
+  margin: 4px;
   color: white;
+  border-style: solid;
+  border-color: rgba(255,255,255,0.5);
+  border-width: 2px;
   font-weight: bold;
-  font-size: 18px;
+  font-size: 15px;
   transition: 0.6s ease;
-  border-radius: 0 3px 3px 0;
+  border-radius: 15px;
   user-select: none;
   background-color: rgba(0,0,0,0.3);
 }
@@ -28,11 +29,15 @@ img {vertical-align: middle;}
 /* Position the "next button" to the right */
 .next {
   right: 0;
-  border-radius: 3px 0 0 3px;
+  border-radius: 15px;
+}
+
+.prev, .next {
+  padding: 5px 15px;
 }
 
 /* On hover, add a black background color with a little bit see-through */
-.prev:hover, .next:hover {
+.prev:hover, .next:hover, .playpause:hover {
   background-color: rgba(0,0,0,0.8);
 }
 
@@ -80,12 +85,12 @@ img {vertical-align: middle;}
   transition: background-color 0.6s ease;
 }
 
-.playpause {
+/* .playpause {
   cursor: pointer;
   height: 15px;
   width: 15px;
   margin: 0 2px;
-}
+} */
 
 .active, .dot:hover {
   background-color: #717171;
@@ -95,6 +100,13 @@ img {vertical-align: middle;}
 .fade {
   animation-name: fade;
   animation-duration: 1.5s;
+}
+
+.wrapper {
+  margin-top: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @keyframes fade {

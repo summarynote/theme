@@ -16,6 +16,7 @@ function Slide({ index, imageUrl, caption, slideRef }) {
 
 export default function Slideshow({ slides = [] }) {
   const playpauseRef = useRef(null);
+  const slidecountRef = useRef(null);
   const mySlideRefs = useRef([]);
   const dotRefs = useRef([]);
 
@@ -41,7 +42,7 @@ export default function Slideshow({ slides = [] }) {
     setAutoPlay((prev) => {
       const newState = !prev;
       if (playpauseRef.current) {
-        playpauseRef.current.innerHTML = newState ? '⏸️' : '▶️';
+        playpauseRef.current.innerHTML = newState ? '️Pause' : 'Play';
       }
       return newState;
     });
@@ -72,15 +73,17 @@ export default function Slideshow({ slides = [] }) {
     });
 
     dots.forEach((dot) => {
-      if (dot) dot.className = dot.className.replace(' active', '');
+      if (dot) dot.classList.remove(slideshowstyles.active);
     })
 
     if (slidesRef[newIndex - 1]) {
       slidesRef[newIndex - 1].style.display = 'block';
     }
     if (dots[newIndex - 1]) {
-      dots[newIndex - 1].className += ' active';
+      dots[newIndex - 1].classList.add(slideshowstyles.active);
     }
+
+    slidecountRef.current.innerHTML = (newIndex) + ' / ' + slidesRef.length;
 
     if (newIndex !== slideIndex) {
       setSlideIndex(newIndex);
@@ -98,20 +101,18 @@ export default function Slideshow({ slides = [] }) {
             caption={slide.caption}
             slideRef={(el) => (mySlideRefs.current[index] = el)}/>
         ))}
-
-        <a className={slideshowstyles.prev} onClick={() => (plusSlides(-1))}>❮</a>
-        <a className={slideshowstyles.next} onClick={() => (plusSlides(1))}>❯</a>
       </div>
 
       <br/>
 
-      <div style={{textAlign:"center"}}>
+      <div className={slideshowstyles.wrapper}>
+        <a className={slideshowstyles.prev} onClick={() => (plusSlides(-1))}>❮</a>
         <span 
           ref={playpauseRef}
           className={slideshowstyles.playpause}
           onClick={togglePlay}
         >
-          ⏸️
+          Pause
         </span>
         {slides.map((_, index) => (
           <span
@@ -121,6 +122,12 @@ export default function Slideshow({ slides = [] }) {
             onClick={() => currentSlide(index + 1)}
           ></span>
         ))}
+        <span
+          ref={slidecountRef}
+          className={slideshowstyles.slidecount}
+        >
+        </span>
+        <a className={slideshowstyles.next} onClick={() => (plusSlides(1))}>❯</a>
       </div>
     </>
   );
