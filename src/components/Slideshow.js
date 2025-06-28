@@ -9,7 +9,7 @@ function Slide({ index, imageUrl, caption, slideRef }) {
     >
       <div className={slideshowstyles.numbertext}>{index + 1} / 3</div>
       <img src={imageUrl} style={{ width:'100%' }} alt={`Slide ${index+1}`}/>
-      <div className={slideshowstyles.text}>{caption}</div>
+      {caption && <div className={slideshowstyles.text}>{caption}</div>}
     </div>
   );
 }
