@@ -7,9 +7,11 @@ function Slide({ index, imageUrl, caption, slideRef }) {
       ref={slideRef}
       className={`${slideshowstyles.mySlides} ${slideshowstyles.fade}`}
     >
-      <div className={slideshowstyles.numbertext}>{index + 1} / 3</div>
-      <img src={imageUrl} style={{ width:'100%' }} alt={`Slide ${index+1}`}/>
-      {caption && <div className={slideshowstyles.text}>{caption}</div>}
+      <div>
+        <div className={slideshowstyles.numbertext}>{index + 1} / 3</div>
+        <img src={imageUrl} style={{ display: 'block', marginLeft: 'auto', marginRight: 'auto' }} alt={`Slide ${index+1}`}/>
+        {caption && <div className={slideshowstyles.text} style={{ position: 'static' }}>{caption}</div>}
+      </div>
     </div>
   );
 }
